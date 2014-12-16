@@ -58,7 +58,7 @@ Please interupt me at any time you have a question.
 - Methods can be tied to any custom var type
   type SpecialInt int
   func (s SpecialInt) Add(a, b int) SpecialInt{
-  	return s +a +b
+    return s +a +b
   }
 
 - Items do not implement Interfaces
@@ -93,6 +93,54 @@ Please interupt me at any time you have a question.
     //do stuff with the file
   }
 
-# Slide 7 Links
+# Slide Express
+* Express
+  package main
+
+  import (
+    "github.com/codegangsta/negroni"
+    "net/http"
+    "fmt"
+  )
+
+  func main() {
+    mux := http.NewServeMux()
+    mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+      fmt.Fprintf(w, "Welcome to the home page!")
+    })
+
+    n := negroni.Classic()
+    n.UseHandler(mux)
+    n.Run(":3000")
+  }
+
+# Slide Play
+* Play
+  package main
+
+  import "github.com/go-martini/martini"
+
+  func main() {
+    m := martini.Classic()
+   
+    m.Group("/content", func(r martini.Router) {
+      r.Get("/tree/", LoginRequired, Tree)
+      r.Get("/orphans/", LoginRequired, Orphans)
+    })
+
+    m.Group("/courses", func(r martini.Router) {
+      r.Get("/", LoginRequired, List)
+      r.Post("/", LoginRequired, binding.Json(CreateCourse{}), Create)
+      r.Group("/key/:productKey", func(r martini.Router) {
+        r.Get("/", GetKey("productKey"), LoginRequired, GetModules)
+        r.Get("/students/", GetKey("productKey"), LoginRequired, GetStudents)
+        r.Get("/next/", GetKey("productKey"), LoginRequired, GetNext)
+      })
+    })
+    m.Run()
+  }
+
+
+# Slide Links
 * Links
 .link http://tour.golang.org tour.golang.org
