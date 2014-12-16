@@ -140,7 +140,8 @@ Please interupt me at any time you have a question.
     m.Run()
   }
 
-
 # Slide Links
 * Links
 .link http://tour.golang.org tour.golang.org
+.link https://github.com/go-martini/martini github.com/go-martini/martini
+.link https://github.com/codegangsta/negroni github.com/codegangsta/negroni
