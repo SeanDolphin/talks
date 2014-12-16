@@ -1,0 +1,98 @@
+# Slide 1
+Golang at 30k feet 
+19:00 15 Dev 2014
+Tags: go golang nodeaz
+
+Sean Dolphin
+KPCompass, Inc.
+
+# Slide 2
+* Introduction
+
+- Golang is a language spec and a tool chain
+- Created in 2007 by Robert Griesemer, Rob Pike, and Ken Thompson
+- It staticly typed language with concurrency built in and a large standard library that compiles with no external depencies by default.
+- It is fast to compile and run 
+
+Docker
+CoreOS
+SoundCloud
+dl.google.com
+
+Please interupt me at any time you have a question.
+
+# Slide 3
+* Basics
+- Every folder is a package and individual importable
+  package bqschema
+
+  import "github.com/SeanDolphin/bqschema"
+- Only capitalized items are exported
+  func Exported(){}
+  func notExported(){}
+
+- Functions are first class citizens
+  func Foo(bar func(int)string){}
+- Functions multi return
+  return 0, "something else", true, []int{0,1,2,3}
+
+# Slide 4
+* Variables
+- Varables are staticly typed
+- They are right defined
+  var myVar int
+  var myArray []string
+- There are no objects but structs
+  type myStruct struct{
+    Test int
+    other string   
+  }
+- Pointers exist and make sense
+  aPointer := &myVAr
+  derefPoint := *aPointer
+- Null does not exist
+
+
+# Slide 5
+* Methods / interfaces
+- Methods can be tied to any custom var type
+  type SpecialInt int
+  func (s SpecialInt) Add(a, b int) SpecialInt{
+  	return s +a +b
+  }
+
+- Items do not implement Interfaces
+- Interfaces are contracts that types can meet
+- Late binding
+
+  type Foo interface{
+    Bar() int 
+  }
+
+  func (s SpecialInt) Bar(){
+    return s.(int)
+  }
+
+# Slide 6
+* Concurrency
+- Anything can be concurrent just by adding go
+  go func(){//I am concurrent}()
+
+- Communicate by channels
+  ch := make(chan int)
+  ch <- 0
+  someVar := <- ch
+
+- syncing built in
+- Locks if you are idiot used to writeing Java
+
+- Automate clean up tasks
+  f,err := os.Open("blah.txt")
+  if err == nil {
+    defer f.Close()
+    //do stuff with the file
+  }
+
+# Slide 7 Links
+* Links
+.link http://tour.golang.org tour.golang.org
